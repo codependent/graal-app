@@ -46,4 +46,32 @@
   "name" : "io.micronaut.http.client.ServiceHttpClientCondition",
   "allPublicMethods" : true,
   "allDeclaredConstructors" : true
+}, {
+  "name" : "com.amazonaws.partitions.model.Partitions",
+  "allPublicMethods" : true,
+  "allDeclaredConstructors" : true
+}, {
+  "name" : "com.amazonaws.partitions.model.Partition",
+  "allPublicMethods" : true,
+  "allDeclaredConstructors" : true
+}, {
+  "name" : "com.amazonaws.partitions.model.Endpoint",
+  "allPublicMethods" : true,
+  "allDeclaredConstructors" : true
+}, {
+  "name" : "com.amazonaws.partitions.model.Region",
+  "allPublicMethods" : true,
+  "allDeclaredConstructors" : true
+}, {
+  "name" : "com.amazonaws.partitions.model.Service",
+  "allPublicMethods" : true,
+  "allDeclaredConstructors" : true
+}, {
+  "name" : "com.amazonaws.partitions.model.CredentialScope",
+  "allPublicMethods" : true,
+  "allDeclaredConstructors" : true
+}, {
+  "name" : "java.util.HashSet",
+  "allPublicMethods" : true,
+  "allDeclaredConstructors" : true
 }]

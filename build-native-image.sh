@@ -5,7 +5,7 @@ ${GRAALVM_HOME}/bin/native-image --no-server \
              --class-path build/libs/graal-app-*.jar \
              -H:ReflectionConfigurationFiles=src/main/resources/reflect.json,src/main/resources/netty-reflect.json,build/reflect.json \
              -H:EnableURLProtocols=http \
-             -H:IncludeResources="logback.xml|application.yml" \
+             -H:IncludeResources="logback.xml|application.yml|com/amazonaws/partitions/endpoints.json" \
              -H:Name=server \
              -H:Class=io.micronaut.function.aws.runtime.MicronautLambdaRuntime \
              -H:+ReportUnsupportedElementsAtRuntime \

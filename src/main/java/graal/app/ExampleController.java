@@ -1,18 +1,17 @@
 package graal.app;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-
-import com.amazonaws.partitions.PartitionsLoader;
 import com.amazonaws.partitions.model.Partitions;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.micronaut.http.annotation.Controller;
+import io.micronaut.http.annotation.Get;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import io.micronaut.http.annotation.*;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 @Controller("/")
 public class ExampleController {
@@ -25,22 +24,12 @@ public class ExampleController {
             .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 
     @Get("/ping")
-    public String index() throws IOException {
+    public Partitions index() throws IOException {
         LOG.info("Local Test");
 
-        String json = "{\n" +
-                "  \"partitions\" : [ {\n" +
-                "    \"defaults\" : {\n" +
-                "      \"hostname\" : \"{service}.{region}.{dnsSuffix}\",\n" +
-                "      \"protocols\" : [ \"https\" ],\n" +
-                "      \"signatureVersions\" : [ \"v4\" ]\n" +
-                "    }\n" +
-                "  }]\n" +
-                "}";
-
-        ByteArrayInputStream stream = new ByteArrayInputStream(json.getBytes());
+        InputStream stream = ExampleController.class.getClassLoader().getResourceAsStream("com/amazonaws/partitions/endpoints.json");
         final Partitions partitions = mapper.readValue(stream, Partitions.class);
         LOG.info("Local Test partitions {}", partitions);
-        return "{\"pong\":true, \"graal\": true}";
+        return partitions;
     }
 }
