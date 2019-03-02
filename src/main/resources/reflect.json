@@ -74,4 +74,12 @@
   "name" : "java.util.HashSet",
   "allPublicMethods" : true,
   "allDeclaredConstructors" : true
+}, {
+  "name" : "org.apache.commons.logging.impl.LogFactoryImpl",
+  "allPublicMethods" : true,
+  "allDeclaredConstructors" : true
+}, {
+  "name" : "org.apache.commons.logging.impl.Jdk14Logger",
+  "allPublicMethods" : true,
+  "allDeclaredConstructors" : true
 }]
