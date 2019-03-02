@@ -1,0 +1,5 @@
+profile: service
+defaultPackage: graal.app
+---
+testFramework: spek
+sourceLanguage: kotlin

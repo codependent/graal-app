@@ -1,0 +1,5 @@
+micronaut:
+    application:
+        name: graal-app
+jackson:
+    module-scan: false
