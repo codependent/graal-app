@@ -17,8 +17,11 @@ import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.conn.HttpClientConnectionManager;
+import org.apache.http.impl.client.HttpClientBuilder;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -39,7 +42,7 @@ public class ExampleController {
     private HttpClient httpClient;
 
     public ExampleController() {
-        //this.httpClient = httpClientFactory.create(HttpClientSettings.adapt(new ClientConfiguration()));
+        this.httpClient = httpClientFactory.create(HttpClientSettings.adapt(new ClientConfiguration()));
         LOG.info("init");
         final ConnectionManagerFactory<HttpClientConnectionManager> cmFactory = new ApacheConnectionManagerFactory();
         final HttpClientConnectionManager cm = cmFactory.create(HttpClientSettings.adapt(new ClientConfiguration()));
@@ -54,5 +57,19 @@ public class ExampleController {
         final Partitions partitions = mapper.readValue(stream, Partitions.class);
         LOG.info("Local Test partitions " + partitions);
         return partitions;
+    }
+
+    @Get("/http")
+    public String httpClient() throws IOException {
+
+        String url = "https://www.google.com/search?q=httpClient";
+        HttpGet request = new HttpGet(url);
+
+        // add request header
+        HttpResponse response = httpClient.execute(request);
+
+        System.out.println("Response Code : "
+                + response.getStatusLine().getStatusCode());
+        return "ok";
     }
 }
