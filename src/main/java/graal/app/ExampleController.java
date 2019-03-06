@@ -44,6 +44,9 @@ public class ExampleController {
     public ExampleController() {
         this.httpClient = httpClientFactory.create(HttpClientSettings.adapt(new ClientConfiguration()));
         LOG.info("init");
+        LOG.info("Registering truststore in ExampleController <init>");
+        System.setProperty("javax.net.ssl.trustStore","/home/application/cacerts");
+        System.setProperty("javax.net.ssl.trustStorePassword", "changeit");
         final ConnectionManagerFactory<HttpClientConnectionManager> cmFactory = new ApacheConnectionManagerFactory();
         final HttpClientConnectionManager cm = cmFactory.create(HttpClientSettings.adapt(new ClientConfiguration()));
         ClientConnectionManagerFactory.wrap(cm);
@@ -61,15 +64,10 @@ public class ExampleController {
 
     @Get("/http")
     public String httpClient() throws IOException {
-
         String url = "https://www.google.com/search?q=httpClient";
         HttpGet request = new HttpGet(url);
-
-        // add request header
         HttpResponse response = httpClient.execute(request);
-
-        System.out.println("Response Code : "
-                + response.getStatusLine().getStatusCode());
+        LOG.info("Response Code : {}" + response.getStatusLine().getStatusCode());
         return "ok";
     }
 }
