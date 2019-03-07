@@ -21,7 +21,6 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.conn.HttpClientConnectionManager;
-import org.apache.http.impl.client.HttpClientBuilder;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -44,9 +43,6 @@ public class ExampleController {
     public ExampleController() {
         this.httpClient = httpClientFactory.create(HttpClientSettings.adapt(new ClientConfiguration()));
         LOG.info("init");
-        LOG.info("Registering truststore in ExampleController <init>");
-        System.setProperty("javax.net.ssl.trustStore","/home/application/cacerts");
-        System.setProperty("javax.net.ssl.trustStorePassword", "changeit");
         final ConnectionManagerFactory<HttpClientConnectionManager> cmFactory = new ApacheConnectionManagerFactory();
         final HttpClientConnectionManager cm = cmFactory.create(HttpClientSettings.adapt(new ClientConfiguration()));
         ClientConnectionManagerFactory.wrap(cm);

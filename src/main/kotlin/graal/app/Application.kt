@@ -9,9 +9,6 @@ object Application {
 
     @JvmStatic
     fun main(args: Array<String>) {
-        LOG.info("Registering truststore in Application")
-        System.setProperty("javax.net.ssl.trustStore","/home/application/cacerts");
-        System.setProperty("javax.net.ssl.trustStorePassword", "changeit");
         Micronaut.build()
                 .packages("graal.app")
                 .mainClass(Application.javaClass)
